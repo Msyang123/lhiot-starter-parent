@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.4.RELEASE</version>
+    </parent>
+
+    <groupId>com.lhiot</groupId>
+    <artifactId>lhiot-starter-parent</artifactId>
+    <version>1.0-RELEASE</version>
+    <packaging>pom</packaging>
+
+    <name>LH-IOT Starter Parent</name>
+    <description>Parent pom providing dependency and plugin management for applications built with Maven</description>
+    <url>http://www.shuiguoshule.com.cn/#</url>
+
+    <developers>
+        <developer>
+            <name>Leon</name>
+            <email>leon_dev@aliyun.com</email>
+            <organization>Fruit ripe, Inc.</organization>
+            <organizationUrl>http://www.shuiguoshule.com.cn</organizationUrl>
+        </developer>
+    </developers>
+
+    <properties>
+        <jsr305.version>3.0.2</jsr305.version>
+        <microx.version>2.0-20180620</microx.version>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <jsr305.version>3.0.2</jsr305.version>
+        <spring.version>5.0.8.RELEASE</spring.version>
+        <spring-boot.version>2.0.4.RELEASE</spring-boot.version>
+        <spring-cloud.version>Finchley.SR1</spring-cloud.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Bill of Materials -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Spring Cloud (micro-services Architecture) -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- code checking -->
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>${jsr305.version}</version>
+            </dependency>
+            <!-- microx-utils -->
+            <dependency>
+                <groupId>com.leon.microx.util</groupId>
+                <artifactId>microx-utils</artifactId>
+                <version>${microx.version}</version>
+            </dependency>
+            <!-- microx-amqp -->
+            <dependency>
+                <groupId>com.leon.microx.common</groupId>
+                <artifactId>microx-amqp-core</artifactId>
+                <version>${microx.version}</version>
+            </dependency>
+            <!-- microx-redis -->
+            <dependency>
+                <groupId>com.leon.microx.common</groupId>
+                <artifactId>microx-redis-core</artifactId>
+                <version>${microx.version}</version>
+            </dependency>
+            <!-- microx-feign -->
+            <dependency>
+                <groupId>com.leon.microx.common</groupId>
+                <artifactId>microx-feign-core</artifactId>
+                <version>${microx.version}</version>
+            </dependency>
+            <!-- microx-swagger2 -->
+            <dependency>
+                <groupId>com.leon.microx.common</groupId>
+                <artifactId>microx-swagger-core</artifactId>
+                <version>${microx.version}</version>
+            </dependency>
+            <!-- microx-restful (web / swagger / openfeign) -->
+            <dependency>
+                <groupId>com.leon.microx</groupId>
+                <artifactId>microx-starter-restful</artifactId>
+                <version>${microx.version}</version>
+            </dependency>
+            <!-- microx-probe (amqp / probe) -->
+            <dependency>
+                <groupId>com.leon.microx</groupId>
+                <artifactId>microx-starter-probe</artifactId>
+                <version>${microx.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://172.16.10.197:8081/repository/maven-releases/</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://172.16.10.197:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
